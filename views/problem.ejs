@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title><%= title %></title>
+        <link rel='stylesheet' href='/stylesheets/problem.css' />
+    </head>
+    <body>
+        <div class="problemPage">
+            <div class="problemInfo">
+                <div><%= title %></div>
+                <div><%= difficulty_level %>Kyu</div>
+                <div><%= solution_count %></div>
+                <p><%= description %></p>
+            </div>
+            <div class="solutionContainer">
+                <div class="inputField">
+                    <textarea name="solution" form="userform">
+                    </textarea>
+                    <form id="userform" method="POST" action=<%= `/problems/${id}` %>>
+                        <button type="submit">Submit</button>
+                        <button type="reset">Reset</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

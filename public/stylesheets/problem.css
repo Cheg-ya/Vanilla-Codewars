@@ -1,0 +1,19 @@
+.problemPage {
+    margin: 0 auto;
+    width: 1000px;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+}
+
+.problemInfo {
+    width: 700px;
+}
+
+.solutionContainer {
+    width: 30%;
+}
+
+.inputField > textarea {
+    width: 90%;
+}

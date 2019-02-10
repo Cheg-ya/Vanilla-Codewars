@@ -5,4 +5,15 @@ body {
 
 a {
   color: #00B7FF;
+  text-decoration: none;
+}
+
+.tabs > li {
+  display: inline-block;
+  margin: 0 10px;
+}
+
+.problems > li {
+  width: 150px;
+  margin: 10px 0;
 }
