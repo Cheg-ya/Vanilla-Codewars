@@ -3,29 +3,28 @@
   <head>
     <title>Codewars</title>
     <link rel="stylesheet" href="/stylesheets/style.css" />
-    <script src="/javascripts/index.js"></script>
   </head>
   <body>
-    <h1>Code Wars</h1>
-    <h2>코딩 전쟁이 일어난다. 모든 대원들, 전투 준비!</h2>
+    <div class="contentsCover">
+      <h1>Vanilla Wars</h1>
+      <ul class="tabs">
+        <li class="showAllBtn"><a href="/">Show All</a></li>
+        <% levelIds.forEach(id => { %>
+          <li class="filterBtn"><a href=<%= `/problems/search/q=${id}` %>>Level <%= id %></a></li>
+        <% }); %>
+      </ul>
 
-    <ul class="tabs">
-      <li class="showAllBtn"><a href="/">Show All</a></li>
-      <% levelIds.forEach(id => { %>
-        <li class="filterBtn"><a href=<%= `/problems/search/${id}` %>>Level <%= id %></a></li>
-      <% }); %>
-    </ul>
-
-    <ul class="problems">
-      <% problems.forEach(data => { %>
-        <li>
-          <a href=<%= `/problems/${data.id}` %>>
-            <div><%= data.title %></div>
-            <div>난이도: Level<%= data.difficulty_level %></div>
-            <div>정답자: <%= data.solution_count %>명</div>
-          </a>
-        </li>
-      <% }); %>
-    </ul>
+      <ul class="problems">
+        <% problems.forEach(data => { %>
+          <li>
+            <a class="link" href=<%= `/problems/${data.id}` %>>
+              <h4><%= data.title %></h4>
+              <div>난이도: Level <%= data.difficulty_level %></div>
+              <div>정답자: <%= data.solution_count %>명</div>
+            </a>
+          </li>
+        <% }); %>
+      </ul>
+    </div>
   </body>
 </html>

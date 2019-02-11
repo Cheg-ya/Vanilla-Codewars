@@ -15,7 +15,7 @@ router.get('/', (req, res, next) => {
     res.render('index', { problems: parsedProblems, levelIds });
 });
 
-router.get('/search/:level', (req, res, next) => {
+router.get('/search/q=:level', (req, res, next) => {
     const problemsList = fs.readFileSync('./data/problems.json', 'utf-8');
     const parsedProblems = JSON.parse(problemsList);
     const targetLevel = req.params.level;
@@ -46,7 +46,7 @@ router.get('/:id', (req, res, next) => {
 
     for (const data of  parsedProblems) {
         if (data.id === +problemId) {
-            res.render('problem', data);
+            res.render('problem', { ...data, executionResults: [] });
             return;
         }
     }
@@ -55,7 +55,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 router.post('/:id', urlencodedParser, (req, res, next) => {
-    const userSolution = req.body.solution;
+    const userAnswer = req.body.userAnswer;
     const problemId = req.params.id;
     const problemsList = fs.readFileSync('./data/problems.json', 'utf-8');
     const parsedProblems = JSON.parse(problemsList);
@@ -69,10 +69,28 @@ router.post('/:id', urlencodedParser, (req, res, next) => {
     }
 
     const { tests } = targetProblem;
-    const solution = new Function('num', `return (${userSolution})(num)`);
-    debugger;
-    
-    res.render('success');
+    const solution = new Function(`return (${userAnswer})(...arguments)`);
+
+    const executionResults = [];
+
+    for (let i = 0; i < tests.length; i++) {
+        const userAnswer = eval(tests[i].code);
+        const expectedAnswer = tests[i].solution;
+
+        if (userAnswer !== expectedAnswer) {
+            executionResults.push({ result: 'failed', expectedAnswer, userAnswer });
+
+        } else {
+            executionResults.push({ result: 'passed', expectedAnswer, userAnswer });
+        }
+    }
+
+    if (executionResults.every(({ result }) => result === 'passed')) {
+        res.render('success', { ...targetProblem, executionResults });
+
+    } else {
+        res.render('problem', { ...targetProblem, executionResults });
+    }
 });
 
 module.exports = router;

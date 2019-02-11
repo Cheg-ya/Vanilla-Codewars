@@ -1,19 +1,109 @@
+body {
+    padding: 50px 0;
+    font: 1rem "Lucida Grande", Helvetica, Arial, sans-serif;
+    background-color: rgba(202, 200, 200, 0.6);
+}
+
 .problemPage {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 1200px;
     margin: 0 auto;
-    width: 1000px;
-    border: 1px solid black;
+    background-color: white;
+    box-shadow: 2px 2px 5px gray;
+    padding: 30px;
+}
+
+.problemInfo {
+    width: 55%;
+    margin-right: 40px;
+    border-right: 1px solid rgba(128, 128, 128, 0.5);
+}
+
+.problemInfo > .title {
+    font-size: 1.6rem;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+
+.problemInfo > span {
+    font-size: 14px;
+    color: gray;
+}
+
+.problemInfo > p {
+    text-align: initial;
+    width: 600px;
+}
+
+.solutionContainer {
+    width: 45%;
+}
+
+#codeContainer {
+    display: none;
+}
+
+#codeEditor {
+    width: inherit;
+    height: 400px;
+    box-shadow: 2px 2px 5px gray;
+}
+
+.submitBtn {
+    position: relative;
+    top: 15px;
+    left: 410px;
+    width: 90px;
+    font-size: 1.3rem;
+    background-color: yellowgreen;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+    color: white;
+}
+
+.submitBtn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+table {
+    text-align: center;
+    font-size: 0.9rem;
+}
+
+table, td {
+    border: 1px solid rgba(128, 128, 128, 0.6);
+}
+
+td {
+    padding: 6px 10px;
+}
+
+.resultInfo {
     display: flex;
     flex-direction: row;
 }
 
-.problemInfo {
-    width: 700px;
+.resultExample {
+    margin-right: 40px;
 }
 
-.solutionContainer {
-    width: 30%;
+.resultContainer {
+    width: 300px;
 }
 
-.inputField > textarea {
-    width: 90%;
+.contents {
+    height: 104px;
+}
+
+.failed {
+    color: red;
+}
+
+.passed {
+    color: green;
 }

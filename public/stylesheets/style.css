@@ -1,11 +1,36 @@
 body {
-  padding: 50px;
+  padding: 50px 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  background-color: rgba(202, 200, 200, 0.6);
+}
+
+ul {
+  padding: 0;
+  text-align: center;
 }
 
 a {
   color: #00B7FF;
   text-decoration: none;
+}
+
+.contentsCover {
+  margin: 0 auto;
+  padding: 30px 0;
+  width: 600px;
+  background-color: white;
+  box-shadow: 2px 2px 5px gray;
+}
+
+.contentsCover > h1 {
+  text-align: center;
+  font-size: 2.2rem;
+  margin: 0;
+  padding: 20px 0;
+}
+
+.tabs {
+  text-align: center;  
 }
 
 .tabs > li {
@@ -14,6 +39,19 @@ a {
 }
 
 .problems > li {
-  width: 150px;
+  display: inline-block;
+  width: 180px;
+  padding: 10px 20px;
+  margin: 10px;
+  text-align: initial;
+  box-shadow: 2px 2px 5px gray;
+}
+
+.problems > li:hover {
+  transform: scale(1.1);
+}
+
+.link > h4 {
   margin: 10px 0;
+  font-size: 15px;
 }
