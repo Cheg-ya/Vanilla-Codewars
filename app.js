@@ -2,6 +2,18 @@ var express = require('express');
 var path = require('path');
 var index = require('./routes/index');
 var problems = require('./routes/problems');
+var mongoose = require('mongoose');
+
+// mongoose.connect('mongodb+srv://admin_song:123123123@cluster0-4hrjv.mongodb.net/vanilla-codewars?retryWrites=true', {useNewUrlParser: true});
+mongoose.connect('mongodb://admin_song:123123123@cluster0-shard-00-00-4hrjv.mongodb.net:27017,cluster0-shard-00-01-4hrjv.mongodb.net:27017,cluster0-shard-00-02-4hrjv.mongodb.net:27017/vanilla-codewars?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {useNewUrlParser: true});
+
+var db = mongoose.connection;
+
+db.on('error', console.error.bind(console, 'connection error:'));
+
+db.once('open', function() {
+  console.log('connected!');
+});
 
 var app = express();
 
@@ -14,7 +26,6 @@ app.use('/problems', problems);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  debugger
   var err = new Error('Not Found');
   err.status = 404;
   next(err);

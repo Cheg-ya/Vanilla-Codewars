@@ -1,13 +1,25 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>success</title>
-        <link rel="stylesheet" href="/stylesheets/success.css" />
-    </head>
-    <body>
-        <div class="successContainer">
-            <h1>Congrats :)</h1>
-            <button><a href="/">Back</a></button>
-        </div>
-    </body>
-</html>
+<div class="resultContainer">
+    <h4>Result</h4>
+    <table class="contents">
+        <tr>
+            <td>
+                <span>Expected</span>
+            </td>
+            <td>
+                <span>Instead</span>
+            </td>
+        </tr>
+        <% executionResults.forEach(({ result, expectedAnswer, userAnswer }) => { %>
+            <tr class=<%= result %>>
+                <td>
+                    <%= expectedAnswer %>
+                </td>
+                <td>
+                    <%= userAnswer %>
+                </td>
+            </tr>
+        <% }); %>
+    </table>
+    <button class="backBtn"><a href="/">Back to home</a></button>
+</div>
+    

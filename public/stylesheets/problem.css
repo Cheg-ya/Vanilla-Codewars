@@ -101,9 +101,33 @@ td {
 }
 
 .failed {
-    color: red;
+    color: white;
+    background-color: red;
 }
 
 .passed {
-    color: green;
+    color: white;
+    background-color: green;
+}
+
+.backBtn {
+    position: absolute;
+    right: 160px;
+    bottom: 15px;
+    font-size: 1.3rem;
+    background-color: yellowgreen;
+    outline: none;
+    border: none;
+    border-radius: 10px;
+    padding: 5px 10px;
+}
+
+.backBtn:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+.backBtn > a {
+    text-decoration: none;
+    color: white;
 }

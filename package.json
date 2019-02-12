@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node --inspect ./bin/www",
+    "start": "node ./bin/www",
     "dev": "SET NODE_ENV=development&& nodemon --inspect ./bin/www"
   },
   "dependencies": {
@@ -13,7 +13,7 @@
     "ejs": "~2.5.7",
     "express": "~4.15.5",
     "monaco-editor": "^0.15.6",
-    "mongoose": "^5.0.15",
+    "mongoose": "^5.4.11",
     "morgan": "~1.9.0",
     "nodemon": "^1.17.3",
     "serve-favicon": "~2.4.5"

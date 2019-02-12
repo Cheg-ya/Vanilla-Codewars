@@ -39,15 +39,19 @@
                         </table>
                     </div>
                     <% if (executionResults.length) { %>
-                        <% include ./failure %>
+                        <% if (passed) { %>
+                            <% include ./success %>
+                        <% } else { %>
+                            <% include ./failure %>
+                        <% } %>
                     <% } %>
                 </div>
             </div>
             <div class="solutionContainer">
                 <div class="inputField">
                     <div id="codeEditor"></div>
-                    <form id="userform" method="POST" action=<%= `/problems/${id}` %>>
-                        <input id="codeContainer" name="userAnswer"></input>
+                    <form id="userform" method="POST" action=<%= `/problems/${_id}` %>>
+                        <input id="codeContainer" name="userAnswer" value=<%= code.length ? code : '' %>>
                         <button class="submitBtn" type="submit">Submit</button>
                     </form>
                 </div>

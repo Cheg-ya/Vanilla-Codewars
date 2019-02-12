@@ -9,15 +9,15 @@
       <h1>Vanilla Wars</h1>
       <ul class="tabs">
         <li class="showAllBtn"><a href="/">Show All</a></li>
-        <% levelIds.forEach(id => { %>
-          <li class="filterBtn"><a href=<%= `/problems/search/q=${id}` %>>Level <%= id %></a></li>
-        <% }); %>
+        <li class="filterBtn"><a href="/problems/search/q=1">Level 1</a></li>
+        <li class="filterBtn"><a href="/problems/search/q=2">Level 2</a></li>
+        <li class="filterBtn"><a href="/problems/search/q=3">Level 3</a></li>
       </ul>
 
       <ul class="problems">
         <% problems.forEach(data => { %>
           <li>
-            <a class="link" href=<%= `/problems/${data.id}` %>>
+            <a class="link" href=<%= `/problems/${data._id}` %>>
               <h4><%= data.title %></h4>
               <div>난이도: Level <%= data.difficulty_level %></div>
               <div>정답자: <%= data.solution_count %>명</div>

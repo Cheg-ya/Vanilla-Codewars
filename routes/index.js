@@ -1,16 +1,14 @@
-var express = require('express');
-var router = express.Router();
-var fs = require('fs');
+const express = require('express');
+const router = express.Router();
+const mongoose = require('mongoose');
+const Problem = require('../models/Problem');
 
 /* GET home page. */
 router.get('/', (req, res, next) => {
-  const problemsList = fs.readFileSync('./data/problems.json', 'utf-8');
-  const parsedProblems = JSON.parse(problemsList);
-
-  let levelIds = parsedProblems.map(({ difficulty_level }) => difficulty_level);
-  levelIds = [...new Set(levelIds)];
-
-  res.render('index', { problems: parsedProblems, levelIds });
+  Problem.find().lean().exec((err, problems) => {
+    res.render('index', { problems });
+    return;
+  });
 });
 
 module.exports = router;
