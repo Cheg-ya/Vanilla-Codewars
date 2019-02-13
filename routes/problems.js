@@ -25,6 +25,7 @@ router.get('/:id', (req, res, next) => {
     if (err) {
       const error = new Error('Page Not Found');
       error.status = 404;
+
       next(error);
     }
 
@@ -39,37 +40,8 @@ router.post('/:id', urlencodedParser, (req, res, next) => {
       const error = new Error('Unexpected Error');
       next(error);
     }
-   
-    const userAnswer = req.body.userAnswer;
-    const { tests } = problem;
-    const solution = new Function(`return (${userAnswer})(...arguments)`);
-    const executionResults = [];
 
-    for (let i = 0; i < tests.length; i++) {
-      let userAnswer;
-
-      try {
-        userAnswer = eval(tests[i].code);
-      } catch (err) {
-        userAnswer = err.message;
-      }
-
-      const expectedAnswer = tests[i].solution;
-
-      if (userAnswer !== expectedAnswer) {
-        executionResults.push({ result: 'failed', expectedAnswer, userAnswer });
-
-      } else {
-        executionResults.push({ result: 'passed', expectedAnswer, userAnswer });
-      }
-    }
-
-    if (executionResults.every(({ result }) => result === 'passed')) {
-      res.render('problem', { passed: true, ...problem, executionResults, code: `${userAnswer}` });
-
-    } else {
-      res.render('problem', { passed: false, ...problem, executionResults, code: `${userAnswer}` });
-    }
+    res.send(problem);
   });
 });
 

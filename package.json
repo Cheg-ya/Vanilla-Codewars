@@ -12,6 +12,7 @@
     "debug": "~2.6.9",
     "ejs": "~2.5.7",
     "express": "~4.15.5",
+    "lodash": "^4.17.11",
     "monaco-editor": "^0.15.6",
     "mongoose": "^5.4.11",
     "morgan": "~1.9.0",

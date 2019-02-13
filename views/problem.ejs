@@ -7,7 +7,7 @@
   </head>
   <body>
     <div class="problemPage">
-      <div class="problemInfo">
+      <div class="problemInfo" data-problem-id=<%= _id %>>
         <h4 class="title"><%= title %></h4>
         <span>난이도: Level <%= difficulty_level %></span>
         <span>정답자: <%= solution_count %>명</span>
@@ -39,20 +39,14 @@
               </tbody>
             </table>
           </div>
-          <% if (executionResults.length) { %>
-            <% if (passed) { %>
-                <% include ./success %>
-            <% } else { %>
-                <% include ./failure %>
-            <% } %>
-          <% } %>
+          <div id="displayResult"></div>
         </div>
       </div>
       <div class="solutionContainer">
         <div class="inputField">
             <div id="codeEditor"></div>
-            <form id="userform" method="POST" action=<%= `/problems/${_id}` %>>
-              <input id="codeContainer" name="userAnswer" value=<%= code.length ? code : '' %>>
+            <form id="userForm">
+              <input id="codeContainer" name="userAnswer">
               <button class="submitBtn" type="submit">Submit</button>
             </form>
         </div>
@@ -60,5 +54,6 @@
     </div>
     <script src="/monaco-editor/min/vs/loader.js"></script>
     <script src="/javascripts/index.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.11/lodash.min.js"></script>
   </body>
 </html>
