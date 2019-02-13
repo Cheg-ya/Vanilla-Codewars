@@ -11,8 +11,8 @@ const ProbemSchema = new Schema({
       description: String,
       tests: [
         {
-        code: String,
-        solution: Number
+          code: String,
+          solution: Number
         }
       ]
     },

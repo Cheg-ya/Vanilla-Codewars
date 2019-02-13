@@ -1,63 +1,64 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title><%= title %></title>
-        <link rel='stylesheet' href='/stylesheets/problem.css' />
-    </head>
-    <body>
-        <div class="problemPage">
-            <div class="problemInfo">
-                <h4 class="title"><%= title %></h4>
-                <span>난이도: Level <%= difficulty_level %></span>
-                <span>정답자: <%= solution_count %>명</span>
-                <h4>문제 설명</h4>
-                <p><%= description %></p>
-                <div class="resultInfo">
-                    <div class="resultExample">
-                        <h4>Examples</h4>
-                        <table>
-                            <tbody>
-                                    <tr>
-                                        <td>
-                                            <span>Input</span>
-                                        </td>
-                                        <td>
-                                            <span>Output</span>
-                                        </td>
-                                    </tr>
-                                <% tests.forEach(test => { %>
-                                    <tr>
-                                        <td>
-                                            <span><%= test.code.split('solution')[1].slice(1, -1) %></span>
-                                        </td>
-                                        <td>
-                                            <span><%= test.solution %></span>
-                                        </td>
-                                    </tr>
-                                <% }); %>
-                            </tbody>
-                        </table>
-                    </div>
-                    <% if (executionResults.length) { %>
-                        <% if (passed) { %>
-                            <% include ./success %>
-                        <% } else { %>
-                            <% include ./failure %>
-                        <% } %>
-                    <% } %>
-                </div>
-            </div>
-            <div class="solutionContainer">
-                <div class="inputField">
-                    <div id="codeEditor"></div>
-                    <form id="userform" method="POST" action=<%= `/problems/${_id}` %>>
-                        <input id="codeContainer" name="userAnswer" value=<%= code.length ? code : '' %>>
-                        <button class="submitBtn" type="submit">Submit</button>
-                    </form>
-                </div>
-            </div>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/problem.css' />
+    <link rel="shortcut icon" href="/images/favicon.png">
+  </head>
+  <body>
+    <div class="problemPage">
+      <div class="problemInfo">
+        <h4 class="title"><%= title %></h4>
+        <span>난이도: Level <%= difficulty_level %></span>
+        <span>정답자: <%= solution_count %>명</span>
+        <h4>문제 설명</h4>
+        <p><%= description %></p>
+        <div class="resultInfo">
+          <div class="resultExample">
+            <h4>Examples</h4>
+            <table>
+              <tbody>
+                <tr>
+                    <td>
+                      <span>Input</span>
+                    </td>
+                    <td>
+                      <span>Output</span>
+                    </td>
+                </tr>
+                <% tests.forEach(test => { %>
+                  <tr>
+                    <td>
+                      <span><%= test.code.split('solution')[1].slice(1, -1) %></span>
+                    </td>
+                    <td>
+                      <span><%= test.solution %></span>
+                    </td>
+                  </tr>
+                <% }); %>
+              </tbody>
+            </table>
+          </div>
+          <% if (executionResults.length) { %>
+            <% if (passed) { %>
+                <% include ./success %>
+            <% } else { %>
+                <% include ./failure %>
+            <% } %>
+          <% } %>
         </div>
-        <script src="/monaco-editor/min/vs/loader.js"></script>
-        <script src="/javascripts/index.js"></script>
-    </body>
+      </div>
+      <div class="solutionContainer">
+        <div class="inputField">
+            <div id="codeEditor"></div>
+            <form id="userform" method="POST" action=<%= `/problems/${_id}` %>>
+              <input id="codeContainer" name="userAnswer" value=<%= code.length ? code : '' %>>
+              <button class="submitBtn" type="submit">Submit</button>
+            </form>
+        </div>
+      </div>
+    </div>
+    <script src="/monaco-editor/min/vs/loader.js"></script>
+    <script src="/javascripts/index.js"></script>
+  </body>
 </html>

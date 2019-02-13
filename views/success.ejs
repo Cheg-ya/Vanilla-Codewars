@@ -1,25 +1,24 @@
 <div class="resultContainer">
-    <h4>Result</h4>
-    <table class="contents">
-        <tr>
-            <td>
-                <span>Expected</span>
-            </td>
-            <td>
-                <span>Instead</span>
-            </td>
-        </tr>
-        <% executionResults.forEach(({ result, expectedAnswer, userAnswer }) => { %>
-            <tr class=<%= result %>>
-                <td>
-                    <%= expectedAnswer %>
-                </td>
-                <td>
-                    <%= userAnswer %>
-                </td>
-            </tr>
-        <% }); %>
-    </table>
-    <button class="backBtn"><a href="/">Back to home</a></button>
+  <h4>Result</h4>
+  <table class="contents">
+    <tr>
+      <td>
+        <span>Expected</span>
+      </td>
+      <td>
+        <span>Instead</span>
+      </td>
+    </tr>
+    <% executionResults.forEach(({ result, expectedAnswer, userAnswer }) => { %>
+      <tr class=<%= result %>>
+        <td>
+          <%= expectedAnswer %>
+        </td>
+        <td>
+          <%= userAnswer %>
+        </td>
+      </tr>
+    <% }); %>
+  </table>
+  <button class="backBtn"><a href="/">Back to home</a></button>
 </div>
-    
