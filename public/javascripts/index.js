@@ -27,18 +27,20 @@ const problemId = document.getElementsByClassName('problemInfo')[0];
 
 userForm.addEventListener('submit', e => {
   e.preventDefault();
+
   fetch(`/problems/${problemId.dataset.problemId}`, { method: 'POST' }).then(res => res.json()
   .then(result => {
     const userAnswer = e.target.children[0].value;
     const { tests } = result;
+    const executionResults = [];    
     const solution = new Function(`return (${userAnswer})(...arguments)`);
-    const executionResults = [];
 
     for (let i = 0; i < tests.length; i++) {
       let userAnswer;
 
       try {
         userAnswer = eval(tests[i].code);
+
       } catch (err) {
         userAnswer = err.message;
       }
@@ -56,10 +58,10 @@ userForm.addEventListener('submit', e => {
     let testResult;
 
     if (executionResults.every(({ result }) => result === 'passed')) {
-      testResult = { passed: true, executionResults };
+      testResult = { allPassed: true, executionResults };
 
     } else {
-      testResult = { passed: false, executionResults };
+      testResult = { allPassed: false, executionResults };
     }
 
     showResult(testResult);
@@ -67,9 +69,9 @@ userForm.addEventListener('submit', e => {
 });
 
 function showResult (result) {
-  const { passed, executionResults } = result;
+  const { allPassed, executionResults } = result;
 
-  if (passed) {
+  if (allPassed) {
     const successTemplate = _.template(
       `<div class="resultContainer">
         <h4>Result</h4>
@@ -93,7 +95,7 @@ function showResult (result) {
             </tr>
           <% }) %>
         </table>
-        <button class="backBtn"><a href="/">Back to home</a></button>
+        <button class="backBtn"><a href="/">Back to main</a></button>
       </div>`
     );
 
@@ -130,6 +132,6 @@ function showResult (result) {
 
     const failureResult = failureTemplate({ results: executionResults });
 
-    document.getElementById('displayResult').innerHTML = failureResult;
+    document.getElementById('resultBoard').innerHTML = failureResult;
   }
 }
