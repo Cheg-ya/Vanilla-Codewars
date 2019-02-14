@@ -41,10 +41,6 @@ body {
     width: 45%;
 }
 
-#codeContainer {
-    display: none;
-}
-
 #codeEditor {
     width: inherit;
     height: 400px;

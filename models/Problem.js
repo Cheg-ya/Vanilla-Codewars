@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
-const ProbemSchema = new Schema({
+const ProblemSchema = new Schema({
   problems: {
     _id: Object,
     title: String,
@@ -17,4 +18,4 @@ const ProbemSchema = new Schema({
   }
 });
 
-module.exports = Problem = mongoose.model('problems', ProbemSchema);
+module.exports = Problem = mongoose.model('problems', ProblemSchema);

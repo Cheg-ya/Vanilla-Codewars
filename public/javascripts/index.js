@@ -10,17 +10,13 @@ const defaultCode = [
 
 require.config({ paths: { 'vs': '/monaco-editor/min/vs' }});
 
+let editor;
+
 require(['vs/editor/editor.main'], () => {
-  const editor = monaco.editor.create(codeEditor, {
+  editor = monaco.editor.create(codeEditor, {
     value: defaultCode,
     language: 'javascript'
   });
-});
-
-codeContainer.value = defaultCode;
-
-codeEditor.addEventListener('keyup', e => {
-  codeContainer.value = e.target.value;
 });
 
 const problemId = document.getElementsByClassName('problemInfo')[0];
@@ -28,8 +24,8 @@ const problemId = document.getElementsByClassName('problemInfo')[0];
 userForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  const userAnswer = e.target.children[0].value;
-
+  const userAnswer = editor.getValue();
+  debugger;
   fetch(`/problems/${problemId.dataset.problemId}`, { 
     method: 'POST',
     headers: {
