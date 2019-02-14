@@ -28,44 +28,16 @@ const problemId = document.getElementsByClassName('problemInfo')[0];
 userForm.addEventListener('submit', e => {
   e.preventDefault();
 
-  fetch(`/problems/${problemId.dataset.problemId}`, { method: 'POST' }).then(res => res.json()
-  .then(result => {
-    const userAnswer = e.target.children[0].value;
-    const { tests } = result;
-    const executionResults = [];    
-    const solution = new Function(`return (${userAnswer})(...arguments)`);
+  const userAnswer = e.target.children[0].value;
 
-    for (let i = 0; i < tests.length; i++) {
-      let userAnswer;
-
-      try {
-        userAnswer = eval(tests[i].code);
-
-      } catch (err) {
-        userAnswer = err.message;
-      }
-
-      const expectedAnswer = tests[i].solution;
-
-      if (userAnswer !== expectedAnswer) {
-        executionResults.push({ result: 'failed', expectedAnswer, userAnswer });
-
-      } else {
-        executionResults.push({ result: 'passed', expectedAnswer, userAnswer });
-      }
-    }
-
-    let testResult;
-
-    if (executionResults.every(({ result }) => result === 'passed')) {
-      testResult = { allPassed: true, executionResults };
-
-    } else {
-      testResult = { allPassed: false, executionResults };
-    }
-
-    showResult(testResult);
-  }));
+  fetch(`/problems/${problemId.dataset.problemId}`, { 
+    method: 'POST',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ solution: userAnswer })
+  }).then(res => res.json().then(result => showResult(result)));
 });
 
 function showResult (result) {
@@ -101,7 +73,7 @@ function showResult (result) {
 
     const successResult = successTemplate({ results: executionResults });
 
-    document.getElementById('displayResult').innerHTML = successResult;
+    document.getElementById('resultBoard').innerHTML = successResult;
 
   } else {
     const failureTemplate = _.template(
