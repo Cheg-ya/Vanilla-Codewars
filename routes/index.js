@@ -9,7 +9,8 @@ router.get('/', (req, res, next) => {
     if (err) {
       const error = new Error('Server might be under maintenance');
       error.status = 500;
-      next(error);
+
+      return next(error);
     }
 
     res.render('index', { problems });

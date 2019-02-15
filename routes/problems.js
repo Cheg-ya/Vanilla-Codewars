@@ -9,11 +9,7 @@ const jsonParser = bodyParser.json();
 
 router.get('/', (req, res, next) => {
   Problem.find().lean().exec((err, problems) => {
-    if (err) {
-      const error = new Error('Server might be under maintenance');
-      error.status = 500;
-      next(error);
-    }
+    if (err) return next(err);
 
     res.render('index', { problems });
   });
@@ -23,17 +19,16 @@ router.get('/search/q=:level', (req, res, next) => {
   Problem.find({ difficulty_level: +req.params.level }).lean().exec((err, problems) => {
     if (err) {
       const error = new Error('Server might be under maintenance');
-      error.status = 500;
-      next(error);
+      error.status = 400;
+
+      return next(error);
     }
 
     if (!problems.length) {
       const error = new Error('Page Not Found');
       error.status = 404;
 
-      next(error);
-
-      return;
+      return next(error);
     }
 
     res.render('index', { problems });
@@ -46,9 +41,7 @@ router.get('/:id', (req, res, next) => {
       const error = new Error('Page Not Found');
       error.status = 404;
 
-      next(error);
-
-      return;
+      return next(error);
     }
 
     res.render('problem', problem);
@@ -58,10 +51,10 @@ router.get('/:id', (req, res, next) => {
 router.post('/:id', jsonParser, (req, res, next) => {
   Problem.findById(req.params.id).lean().exec((err, problem) => {
     if (err) {
-      const error = new Error('Unexpected Error');
-      next(error);
+      const error = new Error('Server might be under maintenance');
+      error.status = 400;
 
-      return;
+      return next(error);
     }
 
     const userAnswer = req.body.solution;
