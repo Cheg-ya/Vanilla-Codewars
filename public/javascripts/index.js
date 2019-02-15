@@ -25,7 +25,7 @@ userForm.addEventListener('submit', e => {
   e.preventDefault();
 
   const userAnswer = editor.getValue();
-  debugger;
+
   fetch(`/problems/${problemId.dataset.problemId}`, { 
     method: 'POST',
     headers: {
