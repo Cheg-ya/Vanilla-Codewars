@@ -4,11 +4,11 @@ const index = require('./routes/index');
 const problems = require('./routes/problems');
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://admin_song:123123123@cluster0-shard-00-00-4hrjv.mongodb.net:27017,cluster0-shard-00-01-4hrjv.mongodb.net:27017,cluster0-shard-00-02-4hrjv.mongodb.net:27017/vanilla-codewars?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true', {useNewUrlParser: true});
+mongoose.connect('mongodb://admin_song:123123123@cluster0-shard-00-00-4hrjv.mongodb.net:27017,cluster0-shard-00-01-4hrjv.mongodb.net:27017,cluster0-shard-00-02-4hrjv.mongodb.net:27017/vanilla-codewars?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin&retryWrites=true',
+  { useNewUrlParser: true }
+);
 
 const db = mongoose.connection;
-
-db.on('error', console.error.bind(console, 'connection error:'));
 
 const app = express();
 
